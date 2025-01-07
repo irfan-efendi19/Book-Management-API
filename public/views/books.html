@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container mt-3">
+      <h1 style="text-align: center; text-decoration: underline">
+        Book Management App
+      </h1>
+      <form
+        id="bookForm"
+        action="/register-book"
+        method="POST"
+        enctype="multipart/form-data"
+        onsubmit="addnewbook(), freeHolds()"
+      >
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="author" class="form-label">Author</label>
+          <input
+            type="text"
+            class="form-control"
+            id="author"
+            name="author"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="publicationYear" class="form-label"
+            >Publication Year</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="publicationYear"
+            name="publicationYear"
+            required
+            min="1000"
+            max="2999"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="pdfFile" class="form-label">Upload PDF</label>
+          <input
+            type="file"
+            class="form-control"
+            id="pdfFile"
+            name="pdfFile"
+            accept="application/pdf"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Add Book</button>
+      </form>
+      <br />
+      <div class="d-flex mb-3 justify-content-between">
+        <div class="custom-select">
+          <label for="books-per-page"> Books per page:</label>
+          <select id="books-per-page" class="form-select">
+            <option value="2">2 per page</option>
+            <option value="4">4 per page</option>
+            <option value="6">6 per page</option>
+          </select>
+        </div>
+        <div class="custom-select">
+          <label for="books-filter">Filter By:</label>
+          <select id="books-filter" class="form-select">
+            <option value="author">Author</option>
+            <option value="publicationYear">Publication year</option>
+          </select>
+        </div>
+      </div>
+      <table class="table table-bordered table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Publication Year</th>
+            <th scope="col">PDF</th>
+            <th scope="col">Modify</th>
+          </tr>
+        </thead>
+        <tbody id="bookTable"></tbody>
+      </table>
+    </div>
+    <div
+      class="pagination-container d-flex justify-content-center"
+      id="pagination"
+    ></div>
+
+    <script src="books.js"></script>
+  </body>
+</html>
